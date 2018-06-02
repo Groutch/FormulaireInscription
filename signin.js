@@ -2,22 +2,25 @@ $(document).ready(function () {
     $("#password").on("keyup", checkpwd);
     $("form").on("submit", getInfos);
     $("#btndisp").on("click", displayUsers);
-    function displayUsers(){
-        $( ".userlistholder" ).empty();
-        var usrlist=localStorage.getItem("userlist");
-        usrlist= usrlist.split(",");
-        for (var i=0; i<usrlist.length; i++){
-            var infolist=localStorage.getItem(usrlist[i]);
-            $( ".userlistholder" ).append(`<div>
+
+    function displayUsers() {
+        $(".userlistholder").empty();
+        var usrlist = localStorage.getItem("userlist");
+        usrlist = usrlist.split(",");
+        for (var i = 0; i < usrlist.length; i++) {
+            var infolist = localStorage.getItem(usrlist[i]);
+            $(".userlistholder").append(`<div>
                 ${usrlist[i]}<br/>
                 ${infolist}<br/>
             </div>`)
         }
     }
-    function checkpwd(){
+
+    function checkpwd() {
         var ans = $("input");
-        console.log(ans[4].value+": ");
+        console.log(ans[4].value + ": ");
     }
+
     function getInfos() {
         var answers = $("input");
         //index answers:       index result:
@@ -50,7 +53,7 @@ $(document).ready(function () {
             localStorage.setItem("userlist", result[3]);
             //La on remplit un deuxieme local storage qui aura pour nom le login pour pouvoir linker
             //les logins dans la liste avec leurs infos dans ces autres localstorage
-            localStorage.setItem(result[3],result[0]+','+result[1]+','+result[2]+','+result[4]+','+result[5]+','+result[6]+','+result[7]+','+result[8]+','+result[9]+','+result[10]);
+            localStorage.setItem(result[3], result[0] + ',' + result[1] + ',' + result[2] + ',' + result[4] + ',' + result[5] + ',' + result[6] + ',' + result[7] + ',' + result[8] + ',' + result[9] + ',' + result[10]);
             alert("Utilisateur bien enregistré!");
         } else {
             //Sinon on va vérifier que le login ne se trouve pas déjà dans la liste
@@ -58,19 +61,19 @@ $(document).ready(function () {
             var listeduser = localStorage.getItem("userlist");
             tabusers = listeduser.split(',');
             //s'il n'est pas dans la liste on peut le push (it to the limit) dans la liste!
-            if (tabusers.indexOf(result[3])== -1) {
-                listeduser+=","+result[3];
+            if (tabusers.indexOf(result[3]) == -1) {
+                listeduser += "," + result[3];
                 console.log("on a une liste deja remplie, on se retrouve donc avec: ");
                 console.log(listeduser);
                 localStorage.setItem("userlist", listeduser);
                 //La on remplit un deuxieme local storage qui aura pour nom le login pour pouvoir linker
                 //les logins dans la liste avec leurs infos dans ces autres localstorage
-                localStorage.setItem(result[3],result[0]+','+result[1]+','+result[2]+','+result[4]+','+result[5]+','+result[6]+','+result[7]+','+result[8]+','+result[9]+','+result[10]);
+                localStorage.setItem(result[3], result[0] + ',' + result[1] + ',' + result[2] + ',' + result[4] + ',' + result[5] + ',' + result[6] + ',' + result[7] + ',' + result[8] + ',' + result[9] + ',' + result[10]);
                 alert("Utilisateur bien enregistré!");
             }
             //S'il est présent, on met un message d'erreur et on retourne 
             //false pour ne pas avoir à intégrer les infos dans le localstorage
-             else {
+            else {
                 console.log("Utilisateur déjà présent");
                 alert("Utilisateur déjà présent");
                 return false

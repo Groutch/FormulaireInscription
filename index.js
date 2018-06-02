@@ -3,15 +3,16 @@ $(document).ready(function () {
     if (localStorage.getItem("userlogged") != null) {
 
         $(".text-welcome").empty();
-        $(".text-welcome").append("Bienvenue "+localStorage.getItem("userlogged"));
-    } 
+        $(".text-welcome").append("Bienvenue " + localStorage.getItem("userlogged"));
+    }
     //Si on clique sur se déco, on se déco
-    $("#logout").on("click",logout);
-    function logout(){
+    $("#logout").on("click", logout);
+
+    function logout() {
         if (localStorage.getItem("userlogged") != null) {
             localStorage.removeItem("userlogged");
             alert("Utilisateur déconnecté")
-        }else{
+        } else {
             alert("Pas connecté");
         }
     }
